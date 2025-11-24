@@ -4,7 +4,7 @@ from threading import Thread
 
 # way 1
 def print_hello_world():
-    print("Hello World with thread ID: " + str(threading.get_ident()) + "\t")
+    print("Hello World with thread ID: " + str(threading.current_thread().name) + "\t")
 
 
 th = Thread(target=print_hello_world)
