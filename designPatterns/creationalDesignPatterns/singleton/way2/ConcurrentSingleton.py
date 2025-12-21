@@ -25,9 +25,9 @@ class ConcurrentSingleton:
     def get_instance():
         if ConcurrentSingleton.__instance is None:
             with ConcurrentSingleton.__lock:
-                if ConcurrentSingleton._instance is None:
-                    ConcurrentSingleton._instance = ConcurrentSingleton()
-        return ConcurrentSingleton._instance
+                if ConcurrentSingleton.__instance is None:
+                    ConcurrentSingleton.__instance = ConcurrentSingleton()
+        return ConcurrentSingleton.__instance
 
 
 def main():
