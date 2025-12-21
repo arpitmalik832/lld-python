@@ -1,8 +1,4 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.exceptions;
+class InvalidEmailException(Exception):
 
-public class InvalidEmailException extends RuntimeException {
-
-    public InvalidEmailException(String message) {
-        super(message);
-    }
-}
+    def __init__(self, message):
+        super().__init__(message)

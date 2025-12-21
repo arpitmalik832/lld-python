@@ -1,8 +1,4 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.exceptions;
+class InvalidMobileException(Exception):
 
-public class InvalidMobileException extends RuntimeException {
-
-    public InvalidMobileException(String message) {
-        super(message);
-    }
-}
+    def __init__(self, message):
+        super().__init__(message)

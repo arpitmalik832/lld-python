@@ -1,8 +1,4 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.exceptions;
+class InvalidIntermediateMarksException(Exception):
 
-public class InvalidIntermediateMarksException extends RuntimeException {
-
-    public InvalidIntermediateMarksException(String message) {
-        super(message);
-    }
-}
+    def __init__(self, message):
+        super().__init__(message)

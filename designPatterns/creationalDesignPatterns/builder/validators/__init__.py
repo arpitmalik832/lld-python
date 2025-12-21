@@ -1,0 +1,11 @@
+import re
+
+
+class EmailValidator:
+    EMAIL_REGEX = re.compile(
+        r"^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$"
+    )
+
+    @staticmethod
+    def is_valid(email: str) -> bool:
+        return bool(EmailValidator.EMAIL_REGEX.match(email))

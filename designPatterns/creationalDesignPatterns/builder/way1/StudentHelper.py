@@ -1,117 +1,108 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.way1;
+from designPatterns.creationalDesignPatterns.builder.exceptions.InvalidEmailException import (
+    InvalidEmailException,
+)
+from designPatterns.creationalDesignPatterns.builder.exceptions.InvalidIntermediateMarksException import (
+    InvalidIntermediateMarksException,
+)
+from designPatterns.creationalDesignPatterns.builder.exceptions.InvalidIntermediateYearException import (
+    InvalidIntermediateYearException,
+)
+from designPatterns.creationalDesignPatterns.builder.exceptions.InvalidMobileException import (
+    InvalidMobileException,
+)
+from designPatterns.creationalDesignPatterns.builder.exceptions.InvalidNameException import (
+    InvalidNameException,
+)
+from designPatterns.creationalDesignPatterns.builder.validators import EmailValidator
 
-import com.example.designPatterns.creationalDesignPatterns.builder.exceptions.*;
-import com.example.designPatterns.creationalDesignPatterns.builder.validators.EmailValidator;
 
-public class StudentHelper {
-    public String id;
-    public String name;
-    public int marks;
-    public String roll;
-    public String mobile;
-    public String email;
-    public int intermediateYear;
-    public int intermediateMarks;
-    public String intermediateRoll;
-    public String intermediateSchool;
+class StudentHelper:
+    def __init__(self):
+        self.id = None
+        self.name = None
+        self.marks = None
+        self.roll = None
+        self.mobile = None
+        self.email = None
+        self.intermediateYear = None
+        self.intermediateMarks = None
+        self.intermediateRoll = None
+        self.intermediateSchool = None
 
-    public StudentHelper() {
+    # setter methods
+    def set_id(self, id: str) -> "StudentHelper":
+        self.id = id
+        return self
 
-    }
+    def set_name(self, name: str) -> "StudentHelper":
+        self.name = name
+        return self
 
-    // setter methods
-    public StudentHelper id(String id) {
-        this.id = id;
-        return this;
-    }
+    def set_marks(self, marks: int) -> "StudentHelper":
+        self.marks = marks
+        return self
 
-    public StudentHelper name(String name) {
-        this.name = name;
-        return this;
-    }
+    def set_roll(self, roll: str) -> "StudentHelper":
+        self.roll = roll
+        return self
 
-    public StudentHelper marks(int marks) {
-        this.marks = marks;
-        return this;
-    }
+    def set_mobile(self, mobile: str) -> "StudentHelper":
+        self.mobile = mobile
+        return self
 
-    public StudentHelper roll(String roll) {
-        this.roll = roll;
-        return this;
-    }
+    def set_email(self, email: str) -> "StudentHelper":
+        self.email = email
+        return self
 
-    public StudentHelper mobile(String mobile) {
-        this.mobile = mobile;
-        return this;
-    }
+    def set_intermediate_year(self, intermediate_year: int) -> "StudentHelper":
+        self.intermediateYear = intermediate_year
+        return self
 
-    public StudentHelper email(String email) {
-        this.email = email;
-        return this;
-    }
+    def set_intermediate_marks(self, intermediate_marks: int) -> "StudentHelper":
+        self.intermediateMarks = intermediate_marks
+        return self
 
-    public StudentHelper intermediateYear(int intermediateYear) {
-        this.intermediateYear = intermediateYear;
-        return this;
-    }
+    def set_intermediate_roll(self, intermediate_roll: str) -> "StudentHelper":
+        self.intermediateRoll = intermediate_roll
+        return self
 
-    public StudentHelper intermediateMarks(int intermediateMarks) {
-        this.intermediateMarks = intermediateMarks;
-        return this;
-    }
+    def set_intermediate_school(self, intermediate_school: str) -> "StudentHelper":
+        self.intermediateSchool = intermediate_school
+        return self
 
-    public StudentHelper intermediateRoll(String intermediateRoll) {
-        this.intermediateRoll = intermediateRoll;
-        return this;
-    }
+    def validate(self):
+        self.validate_name()
+        self.validate_mobile()
+        self.validate_email()
+        self.validate_intermediate_year()
+        self.validate_intermediate_marks()
 
-    public StudentHelper intermediateSchool(String intermediateSchool) {
-        this.intermediateSchool = intermediateSchool;
-        return this;
-    }
+    def validate_name(self):
+        if self.name is None or len(self.name) == 0:
+            raise InvalidNameException("Name cannot be empty")
 
-    public void validate() {
-        validateName();
-        validateMobile();
-        validateEmail();
-        validateIntermediateYear();
-        validateIntermediateMarks();
-    }
+    def validate_mobile(self):
+        if self.mobile is None or len(self.mobile) == 0:
+            raise InvalidMobileException("Mobile cannot be empty")
 
-    public void validateName() {
-        if (name == null || name.isEmpty()) {
-            throw new InvalidNameException("Name cannot be empty");
-        }
+        if len(self.mobile) != 10:
+            raise InvalidMobileException("Mobile number must be of 10 digits")
 
-    }
+    def validate_email(self):
+        if self.email is None or len(self.email) == 0:
+            raise InvalidEmailException("Email cannot be empty")
 
-    public void validateMobile() {
-        if (mobile == null || mobile.isEmpty()) {
-            throw new InvalidMobileException("Mobile cannot be empty");
-        }
-        if (mobile.length() != 10) {
-            throw new InvalidMobileException("Mobile number must be of 10 digits");
-        }
-    }
+        if not EmailValidator.is_valid(self.email):
+            raise InvalidEmailException("Invalid email format")
 
-    public void validateEmail() {
-        if (email == null || email.isEmpty()) {
-            throw new InvalidEmailException("Email cannot be empty");
-        }
-        if (!EmailValidator.isValid(email)) {
-            throw new InvalidEmailException("Invalid email format");
-        }
-    }
+    def validate_intermediate_year(self):
+        if self.intermediateYear > 2022:
+            raise InvalidIntermediateYearException(
+                "Only intermediate holders upto 2022 are allowed"
+            )
 
-    public void validateIntermediateYear() {
-        if (intermediateYear > 2022) {
-            throw new InvalidIntermediateYearException("Only intermediate holders upto 2022 are allowed");
-        }
-    }
-
-    public void validateIntermediateMarks() {
-        if (intermediateMarks < 60) {
-            throw new InvalidIntermediateMarksException("Intermediate marks cannot be less than 60");
-        }
-    }
-}
+    def validate_intermediate_marks(self):
+        if self.intermediateMarks < 60:
+            raise InvalidIntermediateMarksException(
+                "Intermediate marks cannot be less than 60"
+            )

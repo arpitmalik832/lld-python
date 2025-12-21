@@ -1,8 +1,4 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.exceptions;
+class InvalidNameException(Exception):
 
-public class InvalidNameException extends RuntimeException {
-
-    public InvalidNameException(String message) {
-        super(message);
-    }
-}
+    def __init__(self, message):
+        super().__init__(message)

@@ -1,48 +1,36 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.way1;
-
-public class Student {
-    private String id;
-    private String name;
-    private int marks;
-    private String roll;
-    private String mobile;
-    private String email;
-    private int intermediateYear;
-    private int intermediateMarks;
-    private String intermediateRoll;
-    private String intermediateSchool;
-
-    private Student(String id, String name, int marks, String roll, String mobile, String email, int intermediateYear,
-                    int intermediateMarks, String intermediateRoll, String intermediateSchool) {
-        this.id = id;
-        this.name = name;
-        this.marks = marks;
-        this.roll = roll;
-        this.mobile = mobile;
-        this.email = email;
-        this.intermediateYear = intermediateYear;
-        this.intermediateMarks = intermediateMarks;
-        this.intermediateRoll = intermediateRoll;
-        this.intermediateSchool = intermediateSchool;
-    }
-
-    private Student(StudentHelper helper) {
-        this(helper.id,
-                helper.name,
-                helper.marks,
-                helper.roll,
-                helper.mobile,
-                helper.email,
-                helper.intermediateYear,
-                helper.intermediateMarks,
-                helper.intermediateRoll,
-                helper.intermediateSchool);
-    }
-
-    public static Student build(StudentHelper helper) {
-        helper.validate();
-        return new Student(helper);
-    }
+from designPatterns.creationalDesignPatterns.builder.way1.StudentHelper import (
+    StudentHelper,
+)
 
 
-}
+class Student:
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.__init__(
+                args[0].id,
+                args[0].name,
+                args[0].marks,
+                args[0].roll,
+                args[0].mobile,
+                args[0].email,
+                args[0].intermediateYear,
+                args[0].intermediateMarks,
+                args[0].intermediateRoll,
+                args[0].intermediateSchool,
+            )
+        elif len(args) == 10:
+            self.__id = args[0]
+            self.__name = args[1]
+            self.__marks = args[2]
+            self.__roll = args[3]
+            self.__mobile = args[4]
+            self.__email = args[5]
+            self.__intermediateYear = args[6]
+            self.__intermediateMarks = args[7]
+            self.__intermediateRoll = args[8]
+            self.__intermediateSchool = args[9]
+
+    @staticmethod
+    def build(helper: "StudentHelper") -> "Student":
+        helper.validate()
+        return Student(helper)

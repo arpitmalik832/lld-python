@@ -1,8 +1,4 @@
-package com.example.designPatterns.creationalDesignPatterns.builder.exceptions;
+class InvalidIntermediateYearException(Exception):
 
-public class InvalidIntermediateYearException extends RuntimeException {
-
-    public InvalidIntermediateYearException(String message) {
-        super(message);
-    }
-}
+    def __init__(self, message):
+        super().__init__(message)
